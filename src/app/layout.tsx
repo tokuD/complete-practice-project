@@ -1,8 +1,7 @@
+import { ErrorProvider, MemberProvider, ModalProvider } from '@/providers'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Modal } from '@/components'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +15,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ModalProvider>
+        <MemberProvider>
+          <ErrorProvider>
+            <body className="bg-black">
+              <Modal />
+              {children}
+            </body>
+          </ErrorProvider>
+        </MemberProvider>
+      </ModalProvider>
     </html>
   )
 }
